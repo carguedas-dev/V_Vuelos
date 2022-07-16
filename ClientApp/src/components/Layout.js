@@ -53,7 +53,29 @@ export class Layout extends Component {
     }
 
     this.stateChange_GeneralAdmin = () => {
-      this.setState({currentPage : "Bienvenida", currentSubPage : "General"});
+
+      const userType = Number.parseInt(this.props.userType);
+
+      switch(userType){
+        case 1:
+          this.setState({currentPage : "Bienvenida", currentSubPage : "General"});
+          break;
+        case 2: 
+          this.setState({currentPage : "Seguridad", currentSubPage : "Crear Usuario"});
+          break;
+        case 3: 
+          this.setState({currentPage : "Administración", currentSubPage : "Consecutivos"});
+          break;
+        case 4:
+          this.setState({currentPage : "Administración", currentSubPage : "Países"});
+          break;
+        case 5:
+          this.setState({currentPage : "Consulta", currentSubPage : "Bitácora Eventos"});
+          break;
+        default:
+          break;
+      }
+      
     }
   }
 
