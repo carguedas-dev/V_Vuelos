@@ -1,0 +1,14 @@
+.sidePanel{
+    float: left;
+    display: block;
+    background-color: rgb(8, 60, 165);
+    width: 20%;
+    height: 80vh;
+}
+
+.components{
+    display: block;
+    float: right;
+    width: 80%;
+    height: 73vh;
+}

@@ -1,17 +1,72 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
+import { Header } from './Header';
+import { SidePanel } from './SidePanel'
+import '../assets/styles/Layout.css'
+import './SubComponents'
+import { SubComponents } from './SubComponents';
 
 export class Layout extends Component {
   static displayName = Layout.name;
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentPage : 'N/A',
+      currentSubPage : 'N/A',
+      userType : props.userType
+    }
+
+    switch(Number.parseInt(this.state.userType)){
+      case 1:
+        this.state.currentPage = 'Bienvenida';
+        this.state.currentSubPage = 'General';
+        break;
+      case 2: 
+        this.state.currentPage = 'Seguridad';
+        this.state.currentSubPage = 'Crear Usuario';
+        break;
+      case 3: 
+        this.state.currentPage = 'Administración';
+        this.state.currentSubPage = 'Consecutivos';
+        break;
+      case 4:
+        this.state.currentPage = 'Administración';
+        this.state.currentSubPage = 'Países';
+        break;
+      case 5:
+        this.state.currentPage = 'Consulta';
+        this.state.currentSubPage = 'Bitácora Eventos';
+        break;
+      default:
+        break;
+    }
+
+    /*
+      mode == 1 -> Modifies current page and subpages
+      mode == 2 -> Modifies subpage
+      mode == 3 -> Logo click
+       
+    */ 
+    this.stateChange = (cp, csp) => {
+      this.setState({currentPage : cp, currentSubPage : csp});
+    }
+
+    this.stateChange_GeneralAdmin = () => {
+      this.setState({currentPage : "Bienvenida", currentSubPage : "General"});
+    }
+  }
+
   render () {
+    console.log("Rendering::Layout");
+    console.log("Data at LAYOUT level::", this.state.currentPage, this.state.currentSubPage);
     return (
       <div>
-        <NavMenu />
-        <Container>
-          {this.props.children}
-        </Container>
+        <Header stateChange = {this.stateChange_GeneralAdmin}/>
+        <div>
+          <SidePanel stateChange = {this.stateChange} currentPage = {this.state.currentPage} currentSubPage = {this.state.currentSubPage} userType = {this.state.userType}/>
+          <SubComponents stateChange = {this.stateChange} currentPage = {this.state.currentPage} currentSubPage = {this.state.currentSubPage} userType = {this.state.userType}/>
+        </div>
       </div>
     );
   }
