@@ -1,0 +1,56 @@
+﻿.heightForHeader{
+  height: 20vh;
+}
+
+.container{
+  margin: 0px;
+  min-width: 100%;
+}
+
+.userImageContainer{
+  margin: auto;
+  margin-bottom: 10px;
+  display: block;
+  width: 5vw;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.navbar{
+  margin: 0px;
+  overflow: hidden;
+  background: url('../planeWing.jpg');
+  padding: 10px;
+  background-position-y: -1070px;
+  background-repeat: no-repeat;
+}
+
+.logo{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.userText{
+  text-align: center;
+  font-size: 13px;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+header img {
+  cursor: pointer;
+}

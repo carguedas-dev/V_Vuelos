@@ -1,0 +1,8 @@
+li:hover{
+    background-color: #9f9fe655;
+    cursor: pointer;
+}
+
+li:active{
+    background-color: #8888db55
+}

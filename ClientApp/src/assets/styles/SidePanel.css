@@ -1,0 +1,43 @@
+.currentLocation {
+    display: block;
+    font-weight: 100;
+}
+
+.navigationLocator {
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    font-weight: bolder;
+}
+
+.sideOptions {
+    background-color: #FFFFFFDF;
+    margin: 0% 5%;
+    height: 85%;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.buttonGroup {
+    padding: 3px 0px;
+}
+
+.buttonGroup button {
+    background-color: transparent;
+    display: block;
+    margin: auto;
+    border: none; 
+    border-radius: 20px;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 5% 0%;
+}
+
+.buttonGroup button:hover{
+    background-color: #cadaf3;
+}
+
+.buttonGroup button:active{
+    background-color: #a7c0e5;
+}
+
