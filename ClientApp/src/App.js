@@ -15,7 +15,7 @@ export default class App extends Component {
 
   constructor() {
     super();
-    this.userType = "5";
+    this.userType = "1";
   }
 
   render () {
