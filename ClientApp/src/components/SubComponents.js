@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { NavMenu } from './NavMenu'
+
+import CrearUsuario from './subcomponents/CrearUsuario';
+import VerUsuarios from './subcomponents/VerUsuarios';
+
+import Consecutivo from './subcomponents/Consecutivo';
+import Aerolineas from './subcomponents/Aerolineas';
+import Paises from './subcomponents/Paises';
+import Puertas from './subcomponents/Puertas';
+
 import {
   General,
-  Aerolineas,
   AerolineasPais,
   BitacoraErrores,
   BitacoraEventos,
-  Consecutivos,
-  CrearUsuario,
-  Paises,
-  Puertas,
   PuertasActivas,
-  VerUsuarios
 }
   from './subcomponents/subs'
 
@@ -54,7 +57,7 @@ export class SubComponents extends Component {
         componenteARenderizar = <VerUsuarios />
         break;
       case "Consecutivos":
-        componenteARenderizar = <Consecutivos />
+        componenteARenderizar = <Consecutivo />
         break;
       case "Países":
         componenteARenderizar = <Paises />
