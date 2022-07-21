@@ -8,6 +8,7 @@ import Consecutivo from './subcomponents/Consecutivo';
 import Aerolineas from './subcomponents/Aerolineas';
 import Paises from './subcomponents/Paises';
 import Puertas from './subcomponents/Puertas';
+import CrearVuelo from './subcomponents/CrearVuelo'
 
 import {
   General,
@@ -79,6 +80,9 @@ export class SubComponents extends Component {
         break;
       case "Puertas activas":
         componenteARenderizar = <PuertasActivas />
+        break;
+      case "Vuelos":
+        componenteARenderizar = <CrearVuelo />
         break;
       default:
         break;
