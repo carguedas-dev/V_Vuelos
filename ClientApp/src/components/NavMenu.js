@@ -89,7 +89,7 @@ export class NavMenu extends Component {
   administrador() {
     return (
       <div>
-        <nav style={this.navBar}>
+        <nav className="navMenuStyle" style={this.navBar}>
             <ul style={this.ul}>
                 <li onClick={this.handleNavBarClick.bind(this)} style={this.li}>
                   <img src={securityIcon} alt="" height={25} width={25} />

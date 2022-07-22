@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import {LoginTemporal} from './components/LoginTemporal'
+
 export default class App extends Component {
   static displayName = App.name;
 
@@ -21,7 +23,13 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <Layout userType={this.userType}/>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={LoginTemporal} />
+            <Route path='/mainpage' component={Layout} />
+          </Switch>
+        </Router>
+        {/* <Layout userType={this.userType}/> */}
       </div>
       
     );

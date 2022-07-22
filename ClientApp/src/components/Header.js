@@ -22,7 +22,7 @@ export class Header extends Component {
         <Navbar className="heightForHeader" light>
           <Container className='container'>
             <img onClick={this.stateChange} className="logo" src={logo} alt="V_Vuelos Logo" width={97} height={97}/>
-            <ImageHolder image={logo} username="randomUsername"/>
+            <ImageHolder image={logo} username={localStorage.getItem("idUsuario")}/>
           </Container>
         </Navbar>
       </header>
