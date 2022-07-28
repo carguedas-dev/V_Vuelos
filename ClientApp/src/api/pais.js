@@ -14,10 +14,6 @@ export const getPais = async id => {
 
 }
 
-export const putPais = async (id) => {
-
-}
-
 export const deletePais = async id => {
     axios.delete(`${baseURL}${id}`);
 }
