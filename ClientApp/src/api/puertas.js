@@ -6,9 +6,15 @@ const baseURL = 'http://localhost:58214/api/Puertas/';
 export const getPuertas = async () => {
     let puertasResponse = await axios.get(baseURL);
     let puertas = puertasResponse.data;
-    let estadosResponse = await getEstados();
-    let newPuertas = puertas.map(puerta => puerta.estado + 1)
-    //Work in progress...
+    let estados = await getEstados();
+    for (const puerta of puertas) {
+        for (const estado of estados) {
+            if(puerta.estado === estado.id) {
+                puerta.estado = estado.descripcion;
+                break;
+            }
+        }
+    }
     return puertas;
 }
 
@@ -20,7 +26,14 @@ export const getPuerta = async id => {
     return puerta;
 }
 
-export const deletePuerta = id => {
+export const postPuerta = async (num, estado) => {
+    axios.post(baseURL, {
+        numero: num,
+        estado: estado
+    });
+}
+
+export const deletePuerta = async id => {
     axios.delete(`${baseURL}${id}`);
 }
 

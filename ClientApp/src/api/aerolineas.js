@@ -11,6 +11,8 @@ export const getAerolineas = async () => {
 }
 
 export const getAerolinea = async id => {
+    let response = await axios.get(`${baseURL}${id}`);
+    let aerolinea = response.data;
 
 }
 
