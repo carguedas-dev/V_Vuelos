@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import CrearPuertas from "./CrearPuertas";
-import { getPuertas, getPuerta, putPuerta, deletePuerta } from "../../api/puertas";
+import { getPuertas, getPuerta, putPuerta, deletePuerta, postPuerta } from "../../api/puertas";
 
 
 const Puertas = () => {
@@ -9,6 +9,7 @@ const Puertas = () => {
 
     const fetchPuertas = useCallback(async () => {
         let puertas = await getPuertas();
+        console.log(puertas)
         setPuertas(puertas);
     }, []);
 
