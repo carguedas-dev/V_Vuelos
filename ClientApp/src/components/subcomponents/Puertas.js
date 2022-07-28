@@ -1,29 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import CrearPuertas from "./CrearPuertas";
-
-import React from 'react';
+import PuertasDB from '../../DB/PuertasDB';
 
 const Puertas = () => {
-    //Simula GET from DB
-    const puertas = [
-        {
-            number: 456,
-            codigo: 506,
-            detalle: 'Abierta',
-            tipo: 'Entrada'
-        },
-        {
-            number: 231,
-            codigo: 204,
-            detalle: 'Cerrada',
-            tipo: 'Salida'
-        },
-        {
-            number: 145,
-            codigo: 669,
-            detalle: 'Abierta',
-            tipo: 'Salida'
-        },
-    ]
+
+    const { getPuertas} = PuertasDB();
+    const [puertas, setPuertas] = useState([]);
+
+    useEffect(() => {
+        listPuertas();
+    }, puertas)
+  
+      
+    // Funcion para realizar llamado al metodo GET (listado) de puertas de la API
+    const listPuertas = async () => {
+        let response = await getPuertas();
+        if(response){
+            if(response.status === 200){
+            console.log(response.data); // Respuesta exitosa de la API
+            setPuertas(response.data);
+            }else{
+            console.log("ocurrio un error");
+            }
+        }else{
+            console.log("ocurrio un error");
+        }
+    }
 
     const buildrows = puertas.map(gate =>
         <tr>
@@ -36,6 +38,7 @@ const Puertas = () => {
 
     return (
         <div className='d-flex flex-column justify-content-center'>
+            { <button onClick={() => listPuertas()}>Actualizacion de datos</button> }
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -49,7 +52,9 @@ const Puertas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearPuertas />
+            <CrearPuertas 
+                listPuertas={listPuertas}
+            />
         </div>
     );
 }

@@ -10,8 +10,6 @@ import Paises from './subcomponents/Paises';
 import Puertas from './subcomponents/Puertas';
 import CrearVuelo from './subcomponents/CrearVuelo'
 
-import TestingAxios from './subcomponents/TestingAxios';
-
 import {
   General,
   AerolineasPais,
@@ -75,7 +73,7 @@ export class SubComponents extends Component {
         componenteARenderizar = <BitacoraEventos />
         break;
       case "Bitácora Errores":
-        componenteARenderizar = <TestingAxios />
+        componenteARenderizar = <BitacoraErrores />
         break;
       case "Aerolíneas por país":
         componenteARenderizar = <AerolineasPais />

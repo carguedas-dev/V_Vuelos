@@ -1,25 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import CrearAerolineas from "./CrearAerolineas";
+import AerolineasDB from '../../DB/AerolineasDB';
 
 const Aerolineas = () => {
 
-    //Simula GET from DB
-    const aerolineas = [
-        {
-            nombre: 'American Airlines',
-            codigo: 506,
-            flag: '...'
-        },
-        {
-            nombre: 'Vienam Airlines',
-            codigo: 204,
-            flag: '...'
-        },
-        {
-            nombre: 'SouthEast China',
-            codigo: 669,
-            flag: '...'
-        },
-    ]
+    const { getAerolineas} = AerolineasDB();
+    const [aerolineas, setAerolineas] = useState([]);
+
+    useEffect(() => {
+        listAerolineas();
+    }, aerolineas)
+  
+      
+    // Funcion para realizar llamado al metodo GET (listado) de aerolineas de la API
+    const listAerolineas = async () => {
+        let response = await getAerolineas();
+        if(response){
+            if(response.status === 200){
+            console.log(response.data); // Respuesta exitosa de la API
+            setAerolineas(response.data);
+            }else{
+            console.log("ocurrio un error");
+            }
+        }else{
+            console.log("ocurrio un error");
+        }
+    }
 
     const buildrows = aerolineas.map(user =>
         <tr>
@@ -31,6 +37,7 @@ const Aerolineas = () => {
 
     return (
         <div className='d-flex flex-column justify-content-center'>
+            { <button onClick={() => listAerolineas()}>Actualizacion de datos</button> }
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -44,7 +51,9 @@ const Aerolineas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearAerolineas />
+            <CrearAerolineas 
+                listAerolineas={listAerolineas}
+            />
         </div>
     );
 }

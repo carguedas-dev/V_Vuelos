@@ -1,26 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import CrearPais from "./CrearPais";
-
+import PaisesDB from '../../DB/PaisesDB';
 
 const Paises = () => {
 
-    //Simula GET from DB
-    const paises = [
-        {
-            nombre: 'Costa Rica',
-            codigo: 506,
-            flag: '/e/Imagenes/Pais/CR'
-        },
-        {
-            nombre: 'Paraguay',
-            codigo: 204,
-            flag: '/e/Imagenes/Pais/PA'
-        },
-        {
-            nombre: 'Argentina',
-            codigo: 669,
-            flag: '/e/Imagenes/Pais/AR'
-        },
-    ]
+    const { getPaises} = PaisesDB();
+    const [paises, setPaises] = useState([]);
+
+    useEffect(() => {
+        listPaises();
+    }, paises)
+
+    // Funcion para realizar llamado al metodo GET (listado) de paises de la API
+    const listPaises = async () => {
+        let response = await getPaises();
+        if(response){
+            if(response.status === 200){
+            console.log(response.data); // Respuesta exitosa de la API
+            setPaises(response.data);
+            }else{
+            console.log("ocurrio un error");
+            }
+        }else{
+            console.log("ocurrio un error");
+        }
+    }
+
 
     const buildrows = paises.map(user =>
         <tr>
@@ -34,6 +39,7 @@ const Paises = () => {
 
     return (
         <div className='d-flex flex-column justify-content-center'>
+            { <button onClick={() => listPaises()}>Actualizacion de datos</button> }
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -47,7 +53,9 @@ const Paises = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearPais />
+            <CrearPais 
+                listPaises={listPaises}
+            />
         </div>
     );
 }
