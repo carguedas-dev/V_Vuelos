@@ -3,7 +3,7 @@ const CrearVuelo = () => {
     return (
         <div>
             <div className='row'>
-                <h3>Modificar Consecutivo</h3>
+                <h3>Agregar Vuelo</h3>
             </div>
             <form action=''>
             <div className='row mb-3'>

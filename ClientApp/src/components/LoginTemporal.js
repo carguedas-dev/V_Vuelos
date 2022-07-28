@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {obtenerUsuario} from '../api/api_calls'
+import {getUsuario} from '../api/usuario'
 import { Link, history, Redirect } from 'react-router-dom';
 import { Layout } from './Layout';
 
@@ -28,7 +28,7 @@ export class LoginTemporal extends Component {
         return;
       }
 
-      let usuario = await obtenerUsuario(this.state.usuario).then(response => response).catch(e => {
+      let usuario = await getUsuario(this.state.usuario).then(response => response).catch(e => {
         if (e.request.statusText === "Not Found"){
           alert("El usuario no existe.  ");
         }

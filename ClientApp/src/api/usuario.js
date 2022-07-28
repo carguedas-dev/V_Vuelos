@@ -2,7 +2,7 @@ import axios from 'axios';
 let puerto = 58214
 let baseURL = `http://localhost:${puerto}/api/`;
 
-export function obtenerUsuario(id){
+export function getUsuario(id){
     const URL = baseURL + `usuarios/${id}`;
 
     let info = axios.get(URL).then( response => {
@@ -12,7 +12,7 @@ export function obtenerUsuario(id){
     return info;
 }
 
-export function obtenerUsuarios(){
+export function getUsuarios(){
     const URL = baseURL + `usuarios`;
 
     let info = axios.get(URL).then( response => {
