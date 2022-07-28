@@ -9,7 +9,7 @@ export const getPuertas = async () => {
     let estados = await getEstados();
     for (const puerta of puertas) {
         for (const estado of estados) {
-            if(puerta.estado === estado.id) {
+            if (puerta.estado === estado.id) {
                 puerta.estado = estado.descripcion;
                 break;
             }
@@ -37,10 +37,10 @@ export const deletePuerta = async id => {
     axios.delete(`${baseURL}${id}`);
 }
 
-export const putPuerta = async (id, numero, estado) => {
+export const putPuerta = async (id, num, estado) => {
     axios.put(`${baseURL}${id}`,
         {
-            numero: numero,
+            numero: num,
             estado: estado
         })
         .then(response => console.log(response));
