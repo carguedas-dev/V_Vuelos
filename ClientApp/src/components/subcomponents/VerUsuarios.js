@@ -1,21 +1,7 @@
-
+//import { getCrearUsuarios } from "../../api/crearusuario";
 
 const VerUsuarios = () => {
 
-    const users = [
-        {
-            nombre: 'Brandon Ramirez Quiros',
-            rol: 'Administrador'
-        },
-        {
-            nombre: 'Agustin Carlos Arguedas',
-            rol: 'Seguridad'
-        },
-        {
-            nombre: 'Antonio Roldan Arroyave',
-            rol: 'Consultas'
-        },
-    ]
 
     const buildrows = users.map(user => <tr> <td><select id="inputState" className="form-select">
         <option selected>{user.rol}</option>
