@@ -1,36 +1,27 @@
+import { useState, useEffect, useCallback } from "react";
 import CrearPuertas from "./CrearPuertas";
+import { getPuertas, getPuerta, putPuerta, deletePuerta } from "../../api/puertas";
 
-import React from 'react';
 
 const Puertas = () => {
-    //Simula GET from DB
-    const puertas = [
-        {
-            number: 456,
-            codigo: 506,
-            detalle: 'Abierta',
-            tipo: 'Entrada'
-        },
-        {
-            number: 231,
-            codigo: 204,
-            detalle: 'Cerrada',
-            tipo: 'Salida'
-        },
-        {
-            number: 145,
-            codigo: 669,
-            detalle: 'Abierta',
-            tipo: 'Salida'
-        },
-    ]
+
+    const [puertas, setPuertas] = useState([]);
+
+    const fetchPuertas = useCallback(async () => {
+        let puertas = await getPuertas();
+        setPuertas(puertas);
+    }, []);
+
+    useEffect(() => {
+        fetchPuertas();
+    }, [fetchPuertas]);
+
 
     const buildrows = puertas.map(gate =>
-        <tr>
-            <td>{gate.codigo}</td>
-            <td>{gate.number}</td>
-            <td>{gate.detalle}</td>
-            <td>{gate.tipo}</td>
+        <tr key={gate.id}>
+            <td>{gate.id}</td>
+            <td>{gate.numero}</td>
+            <td>{gate.estado}</td>
             <th><button className="btn btn-danger">Eliminar</button></th>
         </tr>);
 
@@ -41,8 +32,8 @@ const Puertas = () => {
                     <tr>
                         <th>Codigo Puerta</th>
                         <th>Numero Puerta</th>
-                        <th>Detalle</th>
-                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>

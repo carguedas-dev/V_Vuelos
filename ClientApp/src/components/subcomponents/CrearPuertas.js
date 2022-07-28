@@ -9,23 +9,19 @@ const CrearPuertas = () => {
             <form action="">
                 <div className="row">
                     <div className="col-2 -md-3">
+                        <label for="gateNum" className="form-label">Codigo Puerta</label>
+                        <input type="number" className="form-control" id="gateNum" disabled />
+                    </div>
+                    <div className="col-2 -md-3">
                         <label for="gateNum" className="form-label">Numero Puerta</label>
                         <input type="number" className="form-control" id="gateNum" />
                     </div>
                     <div className="col-2 mb-3">
-                        <label for="logo" className="form-label">Detalle</label>
+                        <label for="logo" className="form-label">Estado</label>
                         <select id="inputState" class="form-select">
                             <option selected>Choose...</option>
                             <option>Abierta</option>
                             <option>Cerrada</option>
-                        </select>
-                    </div>
-                    <div className="col-2 mb-3">
-                        <label for="logo" className="form-label">Tipo</label>
-                        <select id="inputState" class="form-select">
-                            <option selected>Choose...</option>
-                            <option>Entrada</option>
-                            <option>Salida</option>
                         </select>
                     </div>
                 </div>
