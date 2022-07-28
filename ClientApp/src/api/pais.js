@@ -5,7 +5,6 @@ const baseURL = 'http://localhost:58214/api/Paises/';
 export const getPaises = async () => {
     let response = await axios.get(baseURL);
     let paises = response.data;
-    console.log(paises)
     return paises;
 }
 
@@ -20,5 +19,5 @@ export const putPais = async (id) => {
 }
 
 export const deletePais = async id => {
-
+    axios.delete(`${baseURL}${id}`);
 }
