@@ -1,31 +1,26 @@
+import { useState, useEffect, useCallback } from "react";
 import CrearAerolineas from "./CrearAerolineas";
+import { getAerolineas } from "../../api/aerolineas";
 
 const Aerolineas = () => {
 
-    //Simula GET from DB
-    const aerolineas = [
-        {
-            nombre: 'American Airlines',
-            codigo: 506,
-            flag: '...'
-        },
-        {
-            nombre: 'Vienam Airlines',
-            codigo: 204,
-            flag: '...'
-        },
-        {
-            nombre: 'SouthEast China',
-            codigo: 669,
-            flag: '...'
-        },
-    ]
+    const [aerolineas, setAerolineas] = useState([]);
 
-    const buildrows = aerolineas.map(user =>
-        <tr>
-            <td>{user.codigo}</td>
-            <td>{user.nombre}</td>
-            <td>{user.flag}</td>
+    const fetchAerolineas = useCallback(async () => {
+        let aerolineas = await getAerolineas();
+        setAerolineas(aerolineas);
+    }, []);
+
+    useEffect(() => {
+        fetchAerolineas();
+    }, [fetchAerolineas]);
+
+    const buildrows = aerolineas.map(aer =>
+        <tr key={aer.id}>
+            <td>{aer.id}</td>
+            <td>{aer.nombre}</td>
+            <td>{aer.Imagen}</td>
+            <td>{aer.pais}</td>
             <th><button className="btn btn-danger">Eliminar</button></th>
         </tr>);
 
@@ -37,6 +32,7 @@ const Aerolineas = () => {
                         <th>Airline Code</th>
                         <th>Airline</th>
                         <th>Logo</th>
+                        <th>País</th>
                         <th>Remove</th>
                     </tr>
                 </thead>
