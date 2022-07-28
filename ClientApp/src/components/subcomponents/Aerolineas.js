@@ -1,20 +1,34 @@
 import { useState, useEffect, useCallback } from "react";
 import CrearAerolineas from "./CrearAerolineas";
-import { getAerolineas, getAerolinea, postAerolinea } from "../../api/aerolineas";
+import { getAerolineas, getAerolinea, postAerolinea, deleteAerolinea } from "../../api/aerolineas";
+import { getPaises } from "../../api/pais";
 
 const Aerolineas = () => {
 
     const [aerolineas, setAerolineas] = useState([]);
+    const [paises, setPaises] = useState([]);
 
     const fetchAerolineas = useCallback(async () => {
         let aerolineas = await getAerolineas();
         setAerolineas(aerolineas);
-        // let postAER = postAerolinea('Test Airline', '00x0', 'PA-0');
-        // console.log(postAER)
     }, []);
+
+    const fetchPaises = useCallback(async () => {
+        let paises = await getPaises();
+        setPaises(paises)
+    });
+
+    const deteleAerolinea = e => {
+        deleteAerolinea(e.target.value);
+    }
+
+    const postAero = (nombre, imagen, pais) => {
+        postAerolinea(nombre, imagen, pais);
+    }
 
     useEffect(() => {
         fetchAerolineas();
+        fetchPaises();
     }, [fetchAerolineas]);
 
     const buildrows = aerolineas.map(aer =>
@@ -23,7 +37,10 @@ const Aerolineas = () => {
             <td>{aer.nombre}</td>
             <td>{aer.Imagen}</td>
             <td>{aer.pais}</td>
-            <th><button className="btn btn-danger">Eliminar</button></th>
+            <th><button
+                className="btn btn-danger"
+                value={aer.id}
+                onClick={deteleAerolinea}>Eliminar</button></th>
         </tr>);
 
     return (
@@ -42,7 +59,7 @@ const Aerolineas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearAerolineas />
+            <CrearAerolineas onPost={postAero} paises={paises} />
         </div>
     );
 }
