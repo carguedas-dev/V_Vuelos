@@ -1,13 +1,11 @@
 
 const CrearVuelo = () => {
     return (
-        <form action=''>
-            <div className='row mb-3'>
-                <div className="col col-2">
-                    <label htmlFor='id'>Id: </label>
-                    <input className='form-control' id='id' type='text' />
-                </div>
+        <div>
+            <div className='row'>
+                <h3>Modificar Consecutivo</h3>
             </div>
+            <form action=''>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='fecha Partida'>Fecha partida: </label>
@@ -59,6 +57,8 @@ const CrearVuelo = () => {
             </div>
             <button type="submit" className='btn btn-warning'>Crear Vuelo</button>
         </form>
+        </div>
+        
     );
 }
 

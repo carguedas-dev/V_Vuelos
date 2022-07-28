@@ -8,10 +8,6 @@ const CrearPais = () => {
 
             <form action="">
                 <div className="row">
-                    <div className="col-md-2">
-                        <label for="countryCode" className="form-label">Country Code</label>
-                        <input type="number" className="form-control" id="countryCode" />
-                    </div>
                     <div className="col-md-3">
                         <label for="country" className="form-label">Country</label>
                         <input type="text" className="form-control" id="country" />

@@ -8,10 +8,6 @@ const CrearAerolineas = () => {
 
             <form action="">
                 <div className="row">
-                    <div className="col-md-2">
-                        <label for="airlineCode" className="form-label">Airline Code</label>
-                        <input type="number" className="form-control" id="airlineCode" />
-                    </div>
                     <div className="col-md-3">
                         <label for="airline" className="form-label">Airline</label>
                         <input type="text" className="form-control" id="airline" />

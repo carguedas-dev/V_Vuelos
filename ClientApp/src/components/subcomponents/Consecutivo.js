@@ -42,6 +42,38 @@ const Consecutivo = () => {
                     {buildrows}
                 </tbody>
             </table>
+            <div className='row'>
+                <h3>Modificar Consecutivo</h3>
+            </div>
+            <form>
+                <div className="row">
+                    <div className="col-md-3">
+                        <label for="airline" className="form-label">Descripcion</label>
+                        <input type="text" className="form-control" />
+                    </div>
+                    <div className="col-4 mb-3">
+                        <label for="logo" className="form-label">Consecutivo</label>
+                        <input className="form-control" type="file" />
+                    </div>
+                    <div className="col-4 mb-3">
+                        <label for="logo" className="form-label">Prefijo</label>
+                        <input className="form-control" type="file" />
+                    </div>
+                    <div className="col-4 mb-3">
+                        <label for="logo" className="form-label">Rango Inicial</label>
+                        <input className="form-control" type="file" />
+                    </div>
+                    <div className="col-md-3">
+                        <label for="country" className="form-label">Rango Final</label>
+                        <input type="text" className="form-control" />
+                    </div>
+                </div>
+
+                <div className="col-12">
+                    <button type="submit" className="btn btn-primary mx-3">Modificar</button>
+                    <button className='btn btn-warning mx-3'>Clear</button>
+                </div>
+            </form>
         </div>
     );
 }

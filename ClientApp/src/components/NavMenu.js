@@ -71,7 +71,7 @@ export class NavMenu extends Component {
       case "Administración": 
         let cp = "Administración";
         let csp = "";
-        if (this.state.userType !== "1"){
+        if (this.state.userType !== "3"){
           csp = "Países";
         } else {
           csp = "Consecutivos";
