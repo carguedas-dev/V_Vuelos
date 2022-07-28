@@ -8,10 +8,6 @@ const CrearPuertas = () => {
 
             <form action="">
                 <div className="row">
-                    <div className="col-2 -md-2">
-                        <label for="gateId" className="form-label">Codigo Puerta</label>
-                        <input type="number" className="form-control" id="gateId" />
-                    </div>
                     <div className="col-2 -md-3">
                         <label for="gateNum" className="form-label">Numero Puerta</label>
                         <input type="number" className="form-control" id="gateNum" />
