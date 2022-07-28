@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import CrearAerolineas from "./CrearAerolineas";
-import { getAerolineas, getAerolinea } from "../../api/aerolineas";
+import { getAerolineas, getAerolinea, postAerolinea } from "../../api/aerolineas";
 
 const Aerolineas = () => {
 
@@ -9,6 +9,8 @@ const Aerolineas = () => {
     const fetchAerolineas = useCallback(async () => {
         let aerolineas = await getAerolineas();
         setAerolineas(aerolineas);
+        // let postAER = postAerolinea('Test Airline', '00x0', 'PA-0');
+        // console.log(postAER)
     }, []);
 
     useEffect(() => {
