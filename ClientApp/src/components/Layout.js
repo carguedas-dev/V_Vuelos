@@ -14,7 +14,7 @@ export class Layout extends Component {
     this.state = {
       currentPage : 'N/A',
       currentSubPage : 'N/A',
-      userType : props.userType
+      userType : localStorage.getItem("rol")
     }
 
     switch(Number.parseInt(this.state.userType)){

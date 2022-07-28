@@ -92,7 +92,7 @@ export class SubComponents extends Component {
 
     return (
       <div>
-        <NavMenu stateChange={this.stateChange} currentPage={this.state.currentPage} currentSubPage={this.state.currentSubPage} userType={this.state.userType} />
+        <NavMenu className="navMenuStyle" stateChange={this.stateChange} currentPage={this.state.currentPage} currentSubPage={this.state.currentSubPage} userType={this.state.userType} />
         {componenteARenderizar}
       </div>
     );
