@@ -48,61 +48,60 @@ const CrearVuelo = ({listVuelos}) => {
       }
 
 
-    return (
+      return (
         <form onSubmit={createVuelo}>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='id'>Id: </label>
-                    <input className='form-control' ref={} id='id' type='text' />
+                    <input className='form-control' ref={idVueloRef} id='id' type='text' />
                 </div>
             </div>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='fecha Partida'>Fecha partida: </label>
-                    <input className='form-control' ref={} id='fecha Partida' type='date' />
+                    <input className='form-control' ref={fecha_partidaVueloRef} id='fecha Partida' type='date' />
                 </div>
                 <div className="col col-2">
                     <label htmlFor='hora_partida'>Hora llegada</label>
-                    <input className='form-control' ref={} id='hora_partida' type='time' />
+                    <input className='form-control' ref={hora_partidaVueloRef} id='hora_partida' type='time' />
                 </div>
             </div>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='fecha_llegada'>fecha llegada</label>
-                    <input className='form-control' ref={} id='fecha_llegada' type='date' />
+                    <input className='form-control' ref={fecha_llegadaVueloRef} id='fecha_llegada' type='date' />
                 </div>
                 <div className="col col-2">
                     <label htmlFor='hora_llegada'>hora llegada</label>
-                    <input className='form-control' ref={} id='hora_llegada' type='time' />
+                    <input className='form-control' ref={hora_llegadaVueloRef} id='hora_llegada' type='time' />
                 </div>
             </div>
-
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='aerolinea'>Aerolinea</label>
-                    <input className='form-control' ref={} id='aerolinea' type='text' />
+                    <input className='form-control' ref={aerolineaVueloRef} id='aerolinea' type='text' />
                 </div>
             </div>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='puerta'>Puerta</label>
-                    <input className='form-control' ref={} id='puerta' type='text' />
+                    <input className='form-control' ref={puertaVueloRef} id='puerta' type='text' />
                 </div>
             </div>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='estado'>Estado</label>
-                    <input className='form-control' ref={} id='estado' type='text' />
+                    <input className='form-control' ref={estadoVueloRef} id='estado' type='text' />
                 </div>
             </div>
             <div className='row mb-3'>
                 <div className="col col-2">
                     <label htmlFor='lugar_partida'>Lugar partida</label>
-                    <input className='form-control' ref={} id='lugar_partida' type='text' />
+                    <input className='form-control' ref={partedeVueloRef} id='lugar_partida' type='text' />
                 </div>
                 <div className="col col-2">
                     <label htmlFor='lugar_llegada'>Lugar llegada</label>
-                    <input className='form-control' ref={} id='lugar_llegada' type='text' />
+                    <input className='form-control' ref={llegadeVueloRef} id='lugar_llegada' type='text' />
                 </div>
             </div>
             <button type="submit" className='btn btn-warning'>Crear Vuelo</button>
