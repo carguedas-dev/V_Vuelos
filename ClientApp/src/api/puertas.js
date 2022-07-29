@@ -27,14 +27,16 @@ export const getPuerta = async id => {
 }
 
 export const postPuerta = async (num, estado) => {
-    axios.post(baseURL, {
+    let request = axios.post(baseURL, {
         numero: num,
         estado: estado
     });
+    return request;
 }
 
 export const deletePuerta = async id => {
-    axios.delete(`${baseURL}${id}`);
+    let request = axios.delete(`${baseURL}${id}`);
+    return request;
 }
 
 export const putPuerta = async (id, num, estado) => {
