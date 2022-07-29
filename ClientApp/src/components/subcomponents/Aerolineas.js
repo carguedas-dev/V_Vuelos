@@ -8,28 +8,33 @@ const Aerolineas = () => {
     const [aerolineas, setAerolineas] = useState([]);
     const [paises, setPaises] = useState([]);
 
-    const fetchAerolineas = useCallback(async () => {
+    const getAirlines = async () => {
         let aerolineas = await getAerolineas();
         setAerolineas(aerolineas);
-    }, []);
-
-    const fetchPaises = async () => {
-        let paises = await getPaises();
-        setPaises(paises)
-    };
-
-    const deteleAerolinea = e => {
-        deleteAerolinea(e.target.value);
     }
 
-    const postAero = (nombre, imagen, pais) => {
-        postAerolinea(nombre, imagen, pais);
+    const getCountries = async () => {
+        let paises = await getPaises();
+        setPaises(paises);
+    }
+
+    const deleteAirline = async e => {
+        const id = e.target.value;
+        let request = await deleteAerolinea(id);
+        if (request.status === 200)
+            getAirlines();
+    }
+
+    const addAirline = async (nombre, imagen, pais) => {
+        let request = await postAerolinea(nombre, '00x0', pais);
+        if (request.status === 201)
+            getAirlines();
     }
 
     useEffect(() => {
-        fetchAerolineas();
-        fetchPaises();
-    }, [fetchAerolineas]);
+        getAirlines();
+        getCountries();
+    }, []);
 
     const buildrows = aerolineas.map(aer =>
         <tr key={aer.id}>
@@ -40,7 +45,7 @@ const Aerolineas = () => {
             <th><button
                 className="btn btn-danger"
                 value={aer.id}
-                onClick={deteleAerolinea}>Eliminar</button></th>
+                onClick={deleteAirline}>Eliminar</button></th>
         </tr>);
 
     return (
@@ -59,7 +64,7 @@ const Aerolineas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearAerolineas onPost={postAero} paises={paises} />
+            <CrearAerolineas onPost={addAirline} paises={paises} />
         </div>
     );
 }

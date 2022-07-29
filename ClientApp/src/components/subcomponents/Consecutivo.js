@@ -1,29 +1,26 @@
+import { getConsecutivos } from "../../api/consecutivos";
+import { useState, useEffect } from "react";
 
 const Consecutivo = () => {
 
-    const consecutivos = [
-        {
-            codigo: 1,
-            descripcion: 'Tarifas',
-            consecutivo: 1
-        },
-        {
-            codigo: 2,
-            descripcion: 'Productos y Servicios',
-            consecutivo: 2
-        },
-        {
-            codigo: 3,
-            descripcion: 'Anuncios',
-            consecutivo: 3
-        },
-    ]
+    const [consecutivos, setConsecutivos] = useState([]);
 
-    const buildrows = consecutivos.map(consecutivo =>
-        <tr>
-            <td>{consecutivo.codigo}</td>
-            <td>{consecutivo.descripcion}</td>
-            <td>{consecutivo.consecutivo}</td>
+    const getConsecutives = async () => {
+        let consecutives = await getConsecutivos();
+        setConsecutivos(consecutives);
+    }
+
+    useEffect(() => {
+        getConsecutives();
+    }, []);
+
+    const buildrows = consecutivos.map(conse =>
+        <tr key={conse.id}>
+            <td>{conse.descripcion}</td>
+            <td>{conse.valor}</td>
+            <td>{conse.prefijo}</td>
+            <td>{conse.rango_inicial || 'Not Specified'}</td>
+            <td>{conse.rango_final || 'Not Specified'}</td>
             <th><button className="btn btn-warning">Editar</button></th>
         </tr>);
 
@@ -32,9 +29,12 @@ const Consecutivo = () => {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Codigo</th>
                         <th>Descripcion</th>
                         <th>Consecutivo</th>
+                        <th>Prefijo</th>
+                        <th>Rango Inicial</th>
+                        <th>Rango Final</th>
+                        <th>Editar</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -53,19 +53,19 @@ const Consecutivo = () => {
                     </div>
                     <div className="col-4 mb-3">
                         <label for="logo" className="form-label">Consecutivo</label>
-                        <input className="form-control" type="file" />
+                        <input className="form-control" type="number" />
                     </div>
                     <div className="col-4 mb-3">
                         <label for="logo" className="form-label">Prefijo</label>
-                        <input className="form-control" type="file" />
+                        <input className="form-control" type="text" />
                     </div>
                     <div className="col-4 mb-3">
                         <label for="logo" className="form-label">Rango Inicial</label>
-                        <input className="form-control" type="file" />
+                        <input className="form-control" type="number" />
                     </div>
                     <div className="col-md-3">
                         <label for="country" className="form-label">Rango Final</label>
-                        <input type="text" className="form-control" />
+                        <input type="number" className="form-control" />
                     </div>
                 </div>
 
