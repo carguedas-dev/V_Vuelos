@@ -1,11 +1,12 @@
 import axios from "axios";
 import { getPaises, getPais } from "./pais";
+import { join } from "./Helper";
 
 const baseURL = 'http://localhost:58214/api/Aerolineas/';
 
 export const getAerolineas = async () => {
     let aerolineasResponse = await axios.get(baseURL);
-    let aerolineas = aerolineasResponse.data;
+    let aerolineas = await aerolineasResponse.data;
     let paises = await getPaises();
     for (const aerolinea of aerolineas) {
         for (const pais of paises) {
