@@ -9,7 +9,6 @@ const Paises = () => {
 
     const getCountries = async () => {
         let paises = await getPaises();
-        console.log(paises)
         setPaises(paises);
     }
 
@@ -22,7 +21,7 @@ const Paises = () => {
 
     const addCountry = async (nombre, imagen) => {
         let request = await postPais(nombre, '00x0');
-        if (request.status == 201)
+        if (request.status === 201)
             getCountries();
     }
 
