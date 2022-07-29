@@ -28,21 +28,24 @@ export const getAerolinea = async id => {
 }
 
 export const postAerolinea = async (nombre, imagen, pais) => {
-    axios.post(baseURL, {
+    let request = axios.post(baseURL, {
         nombre: nombre,
         Imagen: imagen,
         pais: pais
     });
+    return request;
 }
 
 export const putAerolinea = async (id, nombre, imagen, pais) => {
-    axios.put(`${baseURL}${id}`, {
+    let request = axios.put(`${baseURL}${id}`, {
         nombre: nombre,
         Imagen: imagen,
         pais: pais
     });
+    return request;
 }
 
 export const deleteAerolinea = async id => {
-    axios.delete(`${baseURL}${id}`);
+    let request = axios.delete(`${baseURL}${id}`);
+    return request;
 }

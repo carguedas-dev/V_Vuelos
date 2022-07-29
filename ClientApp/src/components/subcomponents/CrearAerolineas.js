@@ -8,9 +8,9 @@ const CrearAerolineas = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        let nombre = (nombreRef.current.value)
-        let Image = '00x0'//(ImageRef.current.value)
-        let pais = (paisRef.current.value)
+        let nombre = nombreRef.current.value
+        let Image = ImageRef.current.value
+        let pais = paisRef.current.value
         props.onPost(nombre, Image, pais);
         e.target.reset();
     }
@@ -45,7 +45,6 @@ const CrearAerolineas = props => {
 
                 <div className="col-12">
                     <button type="submit" className="btn btn-primary mx-3">Submit</button>
-                    <button className='btn btn-warning mx-3'>Clear</button>
                 </div>
             </form>
         </div>
