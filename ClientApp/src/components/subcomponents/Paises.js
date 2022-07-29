@@ -31,7 +31,7 @@ const Paises = () => {
 
 
     const buildrows = paises.map(country =>
-        <tr>
+        <tr key={country.id}>
             <td>{country.id}</td>
             <td>{country.nombre}</td>
             <td>{country.imagen}</td>

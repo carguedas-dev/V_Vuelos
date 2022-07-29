@@ -28,12 +28,12 @@ export const getVuelo = async id => {
 
 }
 
-export const postVuelo = async id => {
-    
+export const postVuelo = async () => {
+
 }
 
 export const deleteVuelo = async id => {
-    
+
 }
 
 
