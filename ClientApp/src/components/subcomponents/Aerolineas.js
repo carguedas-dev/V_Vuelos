@@ -13,10 +13,10 @@ const Aerolineas = () => {
         setAerolineas(aerolineas);
     }, []);
 
-    const fetchPaises = useCallback(async () => {
+    const fetchPaises = async () => {
         let paises = await getPaises();
         setPaises(paises)
-    });
+    };
 
     const deteleAerolinea = e => {
         deleteAerolinea(e.target.value);
