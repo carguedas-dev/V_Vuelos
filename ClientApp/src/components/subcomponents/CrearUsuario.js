@@ -32,7 +32,7 @@ const CrearUsuario = () => {
 
         fetchUsuario(id);
         if (usuario!=null){
-            alert("Usuario en uso.")
+            //alert("Usuario en uso.")
             return false;
         }
 

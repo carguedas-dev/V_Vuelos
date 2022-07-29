@@ -31,7 +31,7 @@ export function postUsuario(usuario){
         pregunta_seguridad : usuario.preguntaSeguridad,
         respuesta_seguridad : usuario.respuestaSeguridad
       });
-    alert(`Usuario ${usuario.usuario} introducido exitosamente`);
+    //alert(`Usuario ${usuario.usuario} introducido exitosamente`);
     return info;
 }
 
