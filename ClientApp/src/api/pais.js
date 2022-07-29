@@ -14,6 +14,16 @@ export const getPais = async id => {
 
 }
 
+export const postPais = async (nombre, imagen) => {
+    let request = axios.post(baseURL, {
+        nombre: nombre,
+        imagen: imagen,
+    });
+
+    return request;
+}
+
 export const deletePais = async id => {
-    axios.delete(`${baseURL}${id}`);
+    let request = axios.delete(`${baseURL}${id}`);
+    return request;
 }

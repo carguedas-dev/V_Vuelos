@@ -1,36 +1,47 @@
+import { useState, useEffect } from "react";
 import CrearPais from "./CrearPais";
+import { getPaises, deletePais, postPais } from "../../api/pais";
 
 
 const Paises = () => {
 
-    //Simula GET from DB
-    const paises = [
-        {
-            nombre: 'Costa Rica',
-            codigo: 506,
-            flag: '/e/Imagenes/Pais/CR'
-        },
-        {
-            nombre: 'Paraguay',
-            codigo: 204,
-            flag: '/e/Imagenes/Pais/PA'
-        },
-        {
-            nombre: 'Argentina',
-            codigo: 669,
-            flag: '/e/Imagenes/Pais/AR'
-        },
-    ]
+    const [paises, setPaises] = useState([]);
 
-    const buildrows = paises.map(user =>
-        <tr>
-            <td>{user.codigo}</td>
-            <td>{user.nombre}</td>
-            <td>{user.flag}</td>
-            <th><button className="btn btn-danger">Eliminar</button></th>
+    const getCountries = async () => {
+        let paises = await getPaises();
+        setPaises(paises);
+    }
+
+    const deleteCountry = async e => {
+        const id = e.target.value;
+        let request = await deletePais(id);
+        if (request.status === 200)
+            getCountries();
+    }
+
+    const addCountry = async (nombre, imagen) => {
+        let request = await postPais(nombre, '00x0');
+        if (request.status === 201)
+            getCountries();
+    }
+
+    useEffect(() => {
+        getCountries();
+    }, []);
+
+
+    const buildrows = paises.map(country =>
+        <tr key={country.id}>
+            <td>{country.id}</td>
+            <td>{country.nombre}</td>
+            <td>{country.imagen}</td>
+            <th><button
+                className="btn btn-danger"
+                value={country.id}
+                onClick={deleteCountry}
+            >
+                Eliminar</button></th>
         </tr>);
-
-
 
     return (
         <div className='d-flex flex-column justify-content-center'>
@@ -47,7 +58,7 @@ const Paises = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearPais />
+            <CrearPais onAddCountry={addCountry} />
         </div>
     );
 }

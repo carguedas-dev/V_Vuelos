@@ -1,29 +1,33 @@
 import { useState, useEffect, useCallback } from "react";
 import CrearPuertas from "./CrearPuertas";
-import { getPuertas, getPuerta, putPuerta, deletePuerta, postPuerta } from "../../api/puertas";
+import { getPuertas, deletePuerta, postPuerta } from "../../api/puertas";
 
 
 const Puertas = () => {
 
     const [puertas, setPuertas] = useState([]);
 
-    const fetchPuertas = useCallback(async () => {
-        let puertas = await getPuertas();
-        console.log(puertas)
-        setPuertas(puertas);
-    }, []);
-
-    const delPuerta = e => {
-        deletePuerta(e.target.value);
+    const getGates = async () => {
+        let paises = await getPuertas();
+        setPuertas(paises);
     }
 
-    const postPueta = (nombre, imagen, pais) => {
-        postPuerta(nombre, imagen, pais);
+    const deleteGate = async e => {
+        const id = e.target.value;
+        let request = await deletePuerta(id);
+        if (request.status === 200)
+        getGates();
+    }
+
+    const addGate = async (nombre, estado) => {
+        let request = await postPuerta(nombre, estado);
+        if (request.status === 201)
+        getGates();
     }
 
     useEffect(() => {
-        fetchPuertas();
-    }, [fetchPuertas]);
+        getGates();
+    }, []);
 
 
     const buildrows = puertas.map(gate =>
@@ -34,7 +38,7 @@ const Puertas = () => {
             <th><button
                 className="btn btn-danger"
                 value={gate.id}
-                onClick={delPuerta}
+                onClick={deleteGate}
             >Eliminar</button></th>
         </tr>);
 
@@ -53,7 +57,7 @@ const Puertas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearPuertas onPost={postPueta} />
+            <CrearPuertas onPost={addGate} />
         </div>
     );
 }

@@ -40,7 +40,6 @@ const CrearPuertas = props => {
 
                 <div className="col-12">
                     <button type="submit" className="btn btn-primary mx-3">Submit</button>
-                    <button className='btn btn-warning mx-3'>Clear</button>
                 </div>
             </form>
         </div>
