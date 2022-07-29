@@ -13,6 +13,14 @@ const Puertas = () => {
         setPuertas(puertas);
     }, []);
 
+    const delPuerta = e => {
+        deletePuerta(e.target.value);
+    }
+
+    const postPueta = (nombre, imagen, pais) => {
+        postPuerta(nombre, imagen, pais);
+    }
+
     useEffect(() => {
         fetchPuertas();
     }, [fetchPuertas]);
@@ -23,7 +31,11 @@ const Puertas = () => {
             <td>{gate.id}</td>
             <td>{gate.numero}</td>
             <td>{gate.estado}</td>
-            <th><button className="btn btn-danger">Eliminar</button></th>
+            <th><button
+                className="btn btn-danger"
+                value={gate.id}
+                onClick={delPuerta}
+            >Eliminar</button></th>
         </tr>);
 
     return (
@@ -41,7 +53,7 @@ const Puertas = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <CrearPuertas />
+            <CrearPuertas onPost={postPueta} />
         </div>
     );
 }

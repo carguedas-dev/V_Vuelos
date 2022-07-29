@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import CrearAerolineas from "./CrearAerolineas";
-import { getAerolineas, getAerolinea, postAerolinea, deleteAerolinea } from "../../api/aerolineas";
+import { getAerolineas, postAerolinea, deleteAerolinea } from "../../api/aerolineas";
 import { getPaises } from "../../api/pais";
 
 const Aerolineas = () => {
