@@ -2,52 +2,52 @@ import axios from 'axios';
 let puerto = 58214
 let baseURL = `http://localhost:${puerto}/api/`;
 
-export function getUsuario(id){
+export function getUsuario(id) {
     const URL = baseURL + `usuarios/${id}`;
 
-    let info = axios.get(URL).then( response => {
+    let info = axios.get(URL).then(response => {
         return response.data
     });
 
     return info;
 }
 
-export function getUsuarios(){
+export const getUsuarios = async () => {
     const URL = baseURL + `usuarios`;
-
-    let info = axios.get(URL);
-
-    return info;
+    let response = await axios.get(URL);
+    let usuarios = response.data;
+    return usuarios;
 }
 
-export function postUsuario(usuario){
+export function postUsuario(usuario) {
     const URL = baseURL + `usuarios`;
 
     let info = axios.post(URL, {
-        usuario1 : usuario.usuario,
-        contrasena : usuario.contrasena,
-        correo : usuario.correo,
-        rol : usuario.rol,
-        pregunta_seguridad : usuario.preguntaSeguridad,
-        respuesta_seguridad : usuario.respuestaSeguridad
-      });
+        usuario1: usuario.usuario,
+        contrasena: usuario.contrasena,
+        correo: usuario.correo,
+        rol: usuario.rol,
+        pregunta_seguridad: usuario.preguntaSeguridad,
+        respuesta_seguridad: usuario.respuestaSeguridad
+    });
     //alert(`Usuario ${usuario.usuario} introducido exitosamente`);
     return info;
 }
 
-export function putUsuario(usuario){
-    const URL = baseURL + `usuarios/${usuario.usuario}`;
+export const putUsuario = async (u) => {
 
-    let info = axios.put(baseURL, {
-        usuario1 : usuario.usuario,
-        contrasena : usuario.contrasena,
-        correo : usuario.correo,
-        rol : usuario.rol,
-        pregunta_seguridad : usuario.preguntaSeguridad,
-        respuesta_seguridad : usuario.respuestaSeguridad
-      });
+    const URL = `${baseURL}Usuarios/${u.usuario1}`
 
-    alert(`Rol de usuario ${usuario.usuario} asignado correctamente.`);
-    return info;
+    let request = await axios.put(URL,
+        {
+            usuario1: u.usuario1,
+            contrasena: u.contrasena,
+            correo: u.correo,
+            rol: +u.rol,
+            pregunta_seguridad: u.pregunta_seguridad,
+            respuesta_seguridad: u.respuesta_seguridad
+        }
+    );
 
+    return request;
 }
