@@ -11,6 +11,7 @@ import Puertas from './subcomponents/Puertas';
 import CrearVuelo from './subcomponents/CrearVuelo'
 
 import AerolineasPais from './subcomponents/AerolineasPais';
+import PuertasActivas from './subcomponents/PuertasActivas';
 
 import TestingAxios from './subcomponents/TestingAxios';
 
@@ -18,7 +19,6 @@ import {
   General,
   BitacoraErrores,
   BitacoraEventos,
-  PuertasActivas,
 }
   from './subcomponents/subs'
 

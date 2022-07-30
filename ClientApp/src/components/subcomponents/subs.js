@@ -59,15 +59,3 @@ export class BitacoraEventos extends Component {
     );
   }
 }
-
-
-
-export class PuertasActivas extends Component {
-  static displayName = PuertasActivas.name;
-
-  render() {
-    return (
-      <div>Componente: Puertas Activas</div>
-    );
-  }
-}
