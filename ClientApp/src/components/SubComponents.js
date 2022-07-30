@@ -10,11 +10,12 @@ import Paises from './subcomponents/Paises';
 import Puertas from './subcomponents/Puertas';
 import CrearVuelo from './subcomponents/CrearVuelo'
 
+import AerolineasPais from './subcomponents/AerolineasPais';
+
 import TestingAxios from './subcomponents/TestingAxios';
 
 import {
   General,
-  AerolineasPais,
   BitacoraErrores,
   BitacoraEventos,
   PuertasActivas,

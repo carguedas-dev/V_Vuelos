@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 
 
-export class AerolineasPais extends Component {
-  static displayName = AerolineasPais.name;
-
-  render() {
-    return (
-      <div>Componente: Aerolineas por pais</div>
-    );
-  }
-}
 
 export class General extends Component {
   static displayName = General.name;
