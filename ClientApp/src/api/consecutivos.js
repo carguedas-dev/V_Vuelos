@@ -5,11 +5,10 @@ const baseURL = 'http://localhost:58214/api/Consecutivos/';
 export const getConsecutivos = async () => {
     let response = await axios.get(baseURL);
     let consecutivos = response.data;
-    console.log(consecutivos)
     return consecutivos;
 }
 
-export const putConsecutivos = async (
+export const putConsecutivo = async (
     id,
     valor,
     descripcion,

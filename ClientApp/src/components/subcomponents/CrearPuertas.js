@@ -3,12 +3,15 @@ import { useRef } from "react";
 const CrearPuertas = props => {
 
     const numGateRef = useRef();
-    const stateGateRef = useRef();
+    let estado = '1';
+    
+    const selectedStatus = selectedCountry => {
+        estado = selectedCountry.target.value
+    }
 
     const onSubmitHandler = e => {
         e.preventDefault();
         let numero = (numGateRef.current.value)
-        let estado = (stateGateRef.current.value)
         props.onPost(numero, estado);
         e.target.reset();
     }
@@ -31,9 +34,9 @@ const CrearPuertas = props => {
                     </div>
                     <div className="col-2 mb-3">
                         <label for="logo" className="form-label">Estado</label>
-                        <select id="inputState" class="form-select">
-                            <option value={1} ref={stateGateRef}>Abierta</option>
-                            <option value={2} ref={stateGateRef}>Cerrada</option>
+                        <select id="inputState" class="form-select" onChange={selectedStatus}>
+                            <option value={1} >Abierta</option>
+                            <option value={2}>Cerrada</option>
                         </select>
                     </div>
                 </div>

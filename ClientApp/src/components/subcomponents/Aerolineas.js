@@ -42,10 +42,10 @@ const Aerolineas = () => {
             <td>{aer.nombre}</td>
             <td>{aer.Imagen}</td>
             <td>{aer.pais}</td>
-            <th><button
+            <td><button
                 className="btn btn-danger"
                 value={aer.id}
-                onClick={deleteAirline}>Eliminar</button></th>
+                onClick={deleteAirline}>Eliminar</button></td>
         </tr>);
 
     return (
