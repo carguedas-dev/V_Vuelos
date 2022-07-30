@@ -65,6 +65,7 @@ const AerolineasPais = () => {
                 id="paises"
                 value={pais}
                 onChange={filterChangeHandler}
+                className='col-1'
             >
                 {buildOptions}
             </select>
