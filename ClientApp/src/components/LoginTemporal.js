@@ -34,16 +34,14 @@ export class LoginTemporal extends Component {
         }
       });
 
-      let respuesta = usuario.data;
-
-      if (respuesta.contrasena != this.state.contra) {
+      if (usuario.contrasena !== this.state.contra) {
         alert("Credenciales incorrectas.");
         return;
       }
 
       alert("Credenciales correctas.");
-      localStorage.setItem("idUsuario", respuesta.usuario1);
-      localStorage.setItem("rol", respuesta.rol);
+      localStorage.setItem("idUsuario", usuario.usuario1);
+      localStorage.setItem("rol", usuario.rol);
 
       window.setTimeout(function() {window.location.href = '/mainpage';}, 500);
       
