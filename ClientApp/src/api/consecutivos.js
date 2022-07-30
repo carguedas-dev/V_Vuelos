@@ -8,7 +8,7 @@ export const getConsecutivos = async () => {
     return consecutivos;
 }
 
-export const putConsecutivos = async (
+export const putConsecutivo = async (
     id,
     valor,
     descripcion,

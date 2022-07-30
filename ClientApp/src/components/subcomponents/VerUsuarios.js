@@ -1,83 +1,67 @@
 
 import { useState, useEffect, useCallback } from "react";
-import { getUsuarios, putUsuario, getUsuario } from "../../api/usuario";
+import { getUsuarios, putUsuario } from "../../api/usuario";
+import { getRoles } from "../../api/roles";
 
 const VerUsuarios = () => {
 
     const [usuarios, setUsuarios] = useState([]);
+    const [roles, setRoles] = useState([]);
 
-    const [previousSelection, setPreviousSelection] = useState([]);
-
-    const roles = [1,2,3,4,5]
-
-    const fetchUsuarios = useCallback(async () => {
-        let usuarios = await getUsuarios().then(response => response.data); 
-        setUsuarios(usuarios);
-    }, []); 
-
-    const fetchUsuario = (id) => {
-        let usuario = getUsuario(id);
-        console.log("dasdasd:::", usuario)
-        return usuario;
+    const getUsers = async () => {
+        let users = await getUsuarios();
+        setUsuarios(users);
     }
 
-    const previous = (e) => {
-        console.log("Previous selection::", e.target.value);
-        setPreviousSelection(e.target.value);
+    const getRols = async () => {
+        let roles = await getRoles();
+        setRoles(roles);
     }
 
-    const put = (e) => {
-        e.preventDefault();
+    const onSelected = async e => {
+        const targetUser = e.target.name;
+        const newRole = e.target.value;
+        let usuario = usuarios.find(u => u.usuario1 === targetUser);
+        usuario.rol = newRole;
+        let request = await putUsuario(usuario);
+        if (request.status === 202) {
+            getUsers();
+            alert(`Rol de usuario ${targetUser} actualizado correctamente.`);
+        }
 
-        if (!window.confirm(`Desea actualizar el rol del usuario a ${e.target.value}?`)){
-            e.target.value = previousSelection;
-            return; 
-        };
-        
-        let usuario = fetchUsuario(e.target.dataset.id);
-        console.log(usuario);
     }
-      
+
     useEffect(() => {
-        fetchUsuarios();
-    }, [fetchUsuarios])
+        getUsers();
+        getRols();
+    }, []);
 
-    const buildrows = usuarios.map(user => 
-        {
-            if (user.rol === null){
-                return (
-                    <tr> <td><select data-id={user.usuario1} onClick={previous} onChange={put} id="inputState" className="text-center form-select">
-                        <option selected value="N/A">Seleccione un rol</option>
-                        {roles.map(rol => <option>{rol}</option>)}
-                    </select></td> <td className="text-center">{user.usuario1}</td> </tr>
-                );
-            } else {
-                return (
-                    <tr> <td><select data-id={user.usuario1} onClick={previous} onChange={put} id="inputState" className="text-center form-select">
-                    {roles.map(rol => {
-                        if (rol === user.rol) {
-                            return <option selected>{rol}</option>
-                        } else {
-                            return <option>{rol}</option>
-                        }
-                    })}
-            </select></td> <td className="text-center">{user.usuario1}</td> </tr>
-                );
-            }
-            
-        });
+    const buildRows = usuarios.map(u =>
+        <tr key={u.usuario1}>
+            <td>{u.usuario1}</td>
+            <td>{u.correo}</td>
+            <td><select
+                name={u.usuario1}
+                id={u.usuario1}
+                value={u.rol}
+                onChange={onSelected}>
+                {roles.map(rol => <option key={rol.id} value={rol.id}>{rol.descripcion}</option>)}
+            </select></td>
+        </tr>
+    )
+
     return (
         <div className='d-flex justify-content-center'>
             <table className="table table-striped">
                 <thead className="table-light">
                     <tr>
-                        <th className="w-75">Rol</th>
-                        <th>Nombre Completo</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log(usuarios)}
-                    {buildrows}
+                    {buildRows}
                 </tbody>
             </table>
         </div>
