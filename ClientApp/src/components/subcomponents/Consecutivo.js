@@ -1,13 +1,22 @@
 import { getConsecutivos } from "../../api/consecutivos";
 import { useState, useEffect } from "react";
+import EditarConsecutivo from "./EditarConsecutivo";
 
 const Consecutivo = () => {
 
     const [consecutivos, setConsecutivos] = useState([]);
+    const [currentConse, setCurrentConse] = useState({});
 
     const getConsecutives = async () => {
         let consecutives = await getConsecutivos();
         setConsecutivos(consecutives);
+    }
+
+
+    const editConsecutive = e => {
+        let id = e.target.value;
+        const consecutive = consecutivos.find(c => c.id === +id)
+        return setCurrentConse(consecutive);
     }
 
     useEffect(() => {
@@ -21,7 +30,11 @@ const Consecutivo = () => {
             <td>{conse.prefijo}</td>
             <td>{conse.rango_inicial || 'Not Specified'}</td>
             <td>{conse.rango_final || 'Not Specified'}</td>
-            <th><button className="btn btn-warning">Editar</button></th>
+            <th><button
+                className="btn btn-warning"
+                value={conse.id}
+                onClick={editConsecutive}
+            >Editar</button></th>
         </tr>);
 
     return (
@@ -42,38 +55,7 @@ const Consecutivo = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <div className='row'>
-                <h3>Modificar Consecutivo</h3>
-            </div>
-            <form>
-                <div className="row">
-                    <div className="col-md-3">
-                        <label for="airline" className="form-label">Descripcion</label>
-                        <input type="text" className="form-control" />
-                    </div>
-                    <div className="col-4 mb-3">
-                        <label for="logo" className="form-label">Consecutivo</label>
-                        <input className="form-control" type="number" />
-                    </div>
-                    <div className="col-4 mb-3">
-                        <label for="logo" className="form-label">Prefijo</label>
-                        <input className="form-control" type="text" />
-                    </div>
-                    <div className="col-4 mb-3">
-                        <label for="logo" className="form-label">Rango Inicial</label>
-                        <input className="form-control" type="number" />
-                    </div>
-                    <div className="col-md-3">
-                        <label for="country" className="form-label">Rango Final</label>
-                        <input type="number" className="form-control" />
-                    </div>
-                </div>
-
-                <div className="col-12">
-                    <button type="submit" className="btn btn-primary mx-3">Modificar</button>
-                    <button className='btn btn-warning mx-3'>Clear</button>
-                </div>
-            </form>
+            <EditarConsecutivo consec={currentConse} />
         </div>
     );
 }

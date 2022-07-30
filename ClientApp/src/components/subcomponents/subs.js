@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 
 
-export class AerolineasPais extends Component {
-  static displayName = AerolineasPais.name;
-
-  render() {
-    return (
-      <div>Componente: Aerolineas por pais</div>
-    );
-  }
-}
 
 export class General extends Component {
   static displayName = General.name;
@@ -65,18 +56,6 @@ export class BitacoraEventos extends Component {
   render() {
     return (
       <div>Componente: Bitacora Eventos</div>
-    );
-  }
-}
-
-
-
-export class PuertasActivas extends Component {
-  static displayName = PuertasActivas.name;
-
-  render() {
-    return (
-      <div>Componente: Puertas Activas</div>
     );
   }
 }

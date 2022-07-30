@@ -16,9 +16,9 @@ export const getVuelos = async () => {
 
     vuelos = helper(vuelos, aerolineas, 'aerolinea', 'id', 'nombre');
     vuelos = helper(vuelos, puertas, 'puerta', 'id', 'numero');
-    vuelos = helper(vuelos, paises, 'llega_a', 'id', 'nombre')
-    vuelos = helper(vuelos, paises, 'parte_de', 'id', 'nombre')
-    vuelos = helper(vuelos, estadosVuelo, 'estado', 'id', 'descripcion')
+    vuelos = helper(vuelos, paises, 'llega_a', 'id', 'nombre');
+    vuelos = helper(vuelos, paises, 'parte_de', 'id', 'nombre');
+    vuelos = helper(vuelos, estadosVuelo, 'estado', 'id', 'descripcion');
 
     console.log('vuelos', vuelos)
     return vuelos

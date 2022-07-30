@@ -35,12 +35,12 @@ const Paises = () => {
             <td>{country.id}</td>
             <td>{country.nombre}</td>
             <td>{country.imagen}</td>
-            <th><button
+            <td><button
                 className="btn btn-danger"
                 value={country.id}
                 onClick={deleteCountry}
             >
-                Eliminar</button></th>
+                Eliminar</button></td>
         </tr>);
 
     return (
