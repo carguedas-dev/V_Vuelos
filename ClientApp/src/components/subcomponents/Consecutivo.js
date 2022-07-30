@@ -1,4 +1,4 @@
-import { getConsecutivos } from "../../api/consecutivos";
+import { getConsecutivos, putConsecutivo } from "../../api/consecutivos";
 import { useState, useEffect } from "react";
 import EditarConsecutivo from "./EditarConsecutivo";
 
@@ -12,11 +12,20 @@ const Consecutivo = () => {
         setConsecutivos(consecutives);
     }
 
-
     const editConsecutive = e => {
         let id = e.target.value;
         const consecutive = consecutivos.find(c => c.id === +id)
         return setCurrentConse(consecutive);
+    }
+
+    const putConsecutive = c => {
+        putConsecutivo(
+            c.id,
+            c.valor,
+            c.descripcion,
+            c.prefijo,
+            c.rango_inicial,
+            c.rango_final);
     }
 
     useEffect(() => {
@@ -55,7 +64,7 @@ const Consecutivo = () => {
                     {buildrows}
                 </tbody>
             </table>
-            <EditarConsecutivo consec={currentConse} />
+            <EditarConsecutivo consec={currentConse} editarConsec={putConsecutive} />
         </div>
     );
 }
