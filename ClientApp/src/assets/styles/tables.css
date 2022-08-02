@@ -1,0 +1,13 @@
+.scrollableDivSmall{
+    max-height: 38vh;
+    min-height: 38vh;
+    overflow:auto;
+    background-color: rgba(220,220,220, 0.3);
+}
+
+.scrollableDivTall{
+    max-height: 50vh;
+    min-height: 50vh;
+    overflow:auto;
+    background-color: rgba(220,220,220, 0.3);
+}

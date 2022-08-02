@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { getUsuario, putUsuario } from '../api/usuario'
 
 export class ModalComponent extends React.Component {
   constructor(props) {
@@ -13,6 +14,10 @@ export class ModalComponent extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.toggleNested = this.toggleNested.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
+
+    this.contraActual = React.createRef();
+    this.contraNueva = React.createRef();
+    this.contraNuevaConfirmacion = React.createRef();
   }
 
   componentDidUpdate(prevProps){
@@ -52,6 +57,33 @@ export class ModalComponent extends React.Component {
     this.toggleAll();
   }
 
+  async cambiarContra(){
+    const contraActual = this.contraActual.current.value;
+    const contraNueva = this.contraNueva.current.value;
+    const contraNuevaConfirmacion = this.contraNuevaConfirmacion.current.value;
+
+    let usuario = await getUsuario(localStorage.getItem('idUsuario')).then(res => res);
+
+    if (usuario.contrasena !== contraActual){
+      alert("La contraseña actual introducida no es correcta. Volver a intentar.")
+      return;
+    }
+
+    if (contraNueva !== contraNuevaConfirmacion){
+      alert("La nueva contraseña y su confirmación no son iguales. Volver a intentar.");
+      return;
+    }
+
+    usuario.contrasena = contraNueva;
+
+    let request = await putUsuario(usuario);
+    if (request.status === 202) {
+      alert(`Contraseña de usuario ${usuario.usuario1} ha sido actualizada correctamente.`);
+      
+    }
+    this.toggleAll();
+  }
+
   render() {
     return (
       <div>
@@ -68,11 +100,13 @@ export class ModalComponent extends React.Component {
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>Cambio de contraseña</ModalHeader>
               <ModalBody>
-                <input className="form-control text-center" type="text" placeholder='Introducir nueva contraseña' />
+                <input ref={this.contraActual} style={{marginBottom : '15px'}} className="form-control text-center" type="password" placeholder='Contraseña actual' />
+                <input ref={this.contraNueva} style={{marginBottom : '15px'}} className="form-control text-center" type="password" placeholder='Nueva contraseña' />
+                <input ref={this.contraNuevaConfirmacion} className="form-control text-center" type="password" placeholder='Confirmar nueva contraseña' />
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onClick={this.toggleNested}>Cancelar</Button>{' '}
-                <Button color="secondary" onClick={this.toggleAll}>Aceptar</Button>
+                <Button color="primary" onClick={this.toggleNested.bind(this)}>Cancelar</Button>{' '}
+                <Button color="secondary" onClick={this.cambiarContra.bind(this)}>Cambiar Contraseña</Button>
               </ModalFooter>
             </Modal>
           </ModalBody>

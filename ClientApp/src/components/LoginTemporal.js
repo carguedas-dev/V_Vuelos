@@ -53,7 +53,6 @@ export class LoginTemporal extends Component {
     } else {
       this.setState({ contra: e.target.value });
     }
-    console.log(this.state);
   }
 
   render() {

@@ -16,7 +16,6 @@ export class Header extends Component {
   }
 
   render () {
-    console.log("Rendering::Header");
     return (
       <header>
         <Navbar className="heightForHeader" light>

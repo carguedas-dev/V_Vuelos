@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRef } from "react";
 import { postUsuario, getUsuario } from "../../api/usuario";
 import { getPreguntas } from "../../api/preguntasSeguridad"; 
+import { postBitacora } from "../../api/bitacoraEventos"
 
 
 const CrearUsuario = () => {
@@ -25,14 +26,19 @@ const CrearUsuario = () => {
 
     const fetchUsuario = useCallback(async (id) => {
         let usuario = await getUsuario(id);
-        setUsuario(usuario); 
+        return usuario;
     }, [])
 
-    const validate = (id) => {
+    const validate = () => {
 
-        fetchUsuario(id);
-        if (usuario!=null){
-            //alert("Usuario en uso.")
+        if (usuarioRef.current.value === "" ||
+            correoRef.current.value === "" ||
+            contrasenaRef.current.value === "" ||
+            confirmacionContrasenaRef.current.value === "" ||
+            preguntaSeguridadRef.current.value === "N/A" ||
+            respuestaSeguridadRef.current.value === "")
+        {
+            alert("Debe rellenar todos los campos.")
             return false;
         }
 
@@ -41,29 +47,34 @@ const CrearUsuario = () => {
             return false;
         }
 
-        if (usuarioRef.current.value === "" ||
-            correoRef.current.value === "" ||
-            contrasenaRef.current.value === "" ||
-            confirmacionContrasenaRef.current.value === "" ||
-            preguntaSeguridadRef.current.value === "" ||
-            respuestaSeguridadRef.current.value === "")
-        {
-            alert("Debe rellenar todos los campos.")
-            return false;
-        }
-
         if (contrasenaRef.current.value !== confirmacionContrasenaRef.current.value){
             alert("Los campos de 'Contraseña' y 'Confirmar Contraseña' no son iguales.")
             return false;
         }
+
+        return true;
     }
 
-    const post = (e) => {
+    const post = async (e) => {
         e.preventDefault();
 
-        if (validate(usuarioRef.current.value)){
+        if (!validate()){
+            console.log("Retornando");
             return;
         }
+
+        try {
+            await fetchUsuario(usuarioRef.current.value);
+            alert("Usuario en uso. Favor elegir otro.");
+            return;
+        } catch (error) {
+            if (error.response.status === 404) {
+                console.log("Dentro del error.") 
+            }
+        }
+        console.log("Salí del error");
+        
+        
         let usuario = {
             usuario : usuarioRef.current.value,
             contrasena : contrasenaRef.current.value, 
@@ -72,7 +83,24 @@ const CrearUsuario = () => {
             preguntaSeguridad : preguntaSeguridadRef.current.value, 
             respuestaSeguridad: respuestaSeguridadRef.current.value
         }
-        postUsuario(usuario);
+
+        let request = await postUsuario(usuario);
+        console.log(request);
+
+        if (request.status === 201){
+            alert(`Usuario ${usuarioRef.current.value} adicionado exitosamente.`);
+
+            let bitacora = {
+                registro_detalle : usuarioRef.current.value,
+                usuario : localStorage.getItem('idUsuario'),
+                operacion : 1,
+                descripcion : `Se agrega usuario bajo identificación ${usuarioRef.current.value} a base de datos.`
+            }
+
+            console.log(bitacora);
+
+            let request = await postBitacora(bitacora);
+        }
     }
 
     useEffect(() => {
@@ -81,16 +109,16 @@ const CrearUsuario = () => {
 
     return (
 
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center mt-5'>
             <form onSubmit={post}>
                 <div className="row mb-3">
-                    <label for="username" className="col-sm-2 col-form-label">Usuario</label>
+                    <label htmlFor="username" className="col-sm-2 col-form-label">Usuario</label>
                     <div className="col-sm-10">
                         <input ref={usuarioRef} type="text" className="form-control" id="username" />
                     </div>
                 </div>
                 <div className="row mb-3">
-                    <label for="email" className="col-sm-2 col-form-label">Email</label>
+                    <label htmlFor="email" className="col-sm-2 col-form-label">Email</label>
                     <div className="col-sm-10">
                         <input ref={correoRef} type="email" className="form-control" id="email" />
                     </div>
@@ -105,9 +133,9 @@ const CrearUsuario = () => {
                 </div>
                 <div className="row mb-3">
                     <div className="col">
-                        <label for="inputState" className="form-label">Pregunta de Seguridad</label>
+                        <label htmlFor="inputState" className="form-label">Pregunta de Seguridad</label>
                         <select ref={preguntaSeguridadRef} id="inputState" className="form-select">
-                            <option selected value="N/A">Seleccione una pregunta</option>
+                            <option defaultValue value="N/A">Seleccione una pregunta</option>
                             {preguntas.map(pregunta => <option  key={pregunta.id} value={pregunta.id}>{pregunta.descripcion}</option>)}
                         </select>
                     </div>
