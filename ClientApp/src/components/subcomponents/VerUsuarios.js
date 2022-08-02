@@ -22,8 +22,6 @@ const VerUsuarios = () => {
         setRoles(roles);
     }
 
-    console.log(roles)
-
     for (const usuario of usuarios) {
         if (!usuario.rol) console.log(usuario.usuario1);
     }
