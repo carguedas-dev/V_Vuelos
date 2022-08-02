@@ -61,7 +61,7 @@ const VerUsuarios = () => {
             <td><select
                 name={u.usuario1}
                 id={u.usuario1}
-                value={u.rol? u.rol : 0}
+                value={u.rol ? u.rol : 0}
                 onChange={onSelected}>
                 {roles.map(rol => <option key={rol.id} value={rol.id}>{rol.descripcion}</option>)}
             </select></td>
