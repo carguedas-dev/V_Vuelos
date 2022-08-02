@@ -1,53 +1,37 @@
 import axios from 'axios';
-import { getAerolineas } from './aerolineas';
-import { getPaises } from './pais';
-import { getPuertas } from './puertas';
-import { getEstadosVuelo } from './estadoVuelo'
 
-const baseURL = 'http://localhost:58214/api/Vuelos/';
+const baseURL = 'http://localhost:58214/api/Vuelos';
 
 export const getVuelos = async () => {
-    let response = await axios.get(baseURL);
+
+    let response = await axios.get(`${baseURL}Descriptivos`);
     let vuelos = response.data;
-    let aerolineas = await getAerolineas();
-    let paises = await getPaises();
-    let estadosVuelo = await getEstadosVuelo();
-    let puertas = await getPuertas();
 
-    vuelos = helper(vuelos, aerolineas, 'aerolinea', 'id', 'nombre');
-    vuelos = helper(vuelos, puertas, 'puerta', 'id', 'numero');
-    vuelos = helper(vuelos, paises, 'llega_a', 'id', 'nombre');
-    vuelos = helper(vuelos, paises, 'parte_de', 'id', 'nombre');
-    vuelos = helper(vuelos, estadosVuelo, 'estado', 'id', 'descripcion');
-
-    console.log('vuelos', vuelos)
-    return vuelos
+    return vuelos;
 }
 
 export const getVuelo = async id => {
 
 }
 
-export const postVuelo = async () => {
-
+export const postVuelo = async (vuelo) => {
+    let request = await axios.post(baseURL, {
+        fecha_partida : vuelo.fecha_partida,
+        hora_partida : vuelo.hora_llegada, 
+        fecha_llegada : vuelo.fecha_llegada, 
+        hora_llegada : vuelo.hora_llegada, 
+        aerolinea : vuelo.aerolinea, 
+        puerta : vuelo.puerta, 
+        estado : vuelo.estado, 
+        parte_de : vuelo.parte_de, 
+        llega_a : vuelo.llega_a, 
+        saliendo : false
+    });
+    return request;
 }
 
 export const deleteVuelo = async id => {
-
+    let response = await axios.delete(`${baseURL}/${id}`);
+    return response;
 }
 
-
-
-const helper = (mainArray, SecondaryArray, mainId, secId, secTarget) => {
-    let tempArray = [];
-    for (const mainEl of mainArray) {
-        for (const secEl of SecondaryArray) {
-            if (mainEl[mainId] === secEl[secId]) {
-                mainEl[mainId] = secEl[secTarget];
-                tempArray.push(mainEl);
-                break;
-            }
-        }
-    }
-    return tempArray;
-}

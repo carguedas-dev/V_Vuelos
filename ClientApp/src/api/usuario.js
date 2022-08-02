@@ -2,14 +2,13 @@ import axios from 'axios';
 let puerto = 58214
 let baseURL = `http://localhost:${puerto}/api/`;
 
-export function getUsuario(id) {
+export async function getUsuario(id) {
     const URL = baseURL + `usuarios/${id}`;
 
-    let info = axios.get(URL).then(response => {
-        return response.data
-    });
+    let response = await axios.get(URL);
+    let usuario = response.data
 
-    return info;
+    return usuario;
 }
 
 export const getUsuarios = async () => {
@@ -22,7 +21,7 @@ export const getUsuarios = async () => {
 export function postUsuario(usuario) {
     const URL = baseURL + `usuarios`;
 
-    let info = axios.post(URL, {
+    let request = axios.post(URL, {
         usuario1: usuario.usuario,
         contrasena: usuario.contrasena,
         correo: usuario.correo,
@@ -30,8 +29,8 @@ export function postUsuario(usuario) {
         pregunta_seguridad: usuario.preguntaSeguridad,
         respuesta_seguridad: usuario.respuestaSeguridad
     });
-    //alert(`Usuario ${usuario.usuario} introducido exitosamente`);
-    return info;
+
+    return request;
 }
 
 export const putUsuario = async (u) => {

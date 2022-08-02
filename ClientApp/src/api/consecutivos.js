@@ -8,23 +8,27 @@ export const getConsecutivos = async () => {
     return consecutivos;
 }
 
-export const putConsecutivo = async (
-    id,
-    valor,
-    descripcion,
-    prefijo,
-    rango_inicial,
-    rango_final
-) => {
-    let request = axios.put(`${baseURL}${id}`,
-        {
-            id: id,
-            valor: valor,
-            descripcion: descripcion,
-            prefijo: prefijo,
-            rango_inicial: rango_inicial,
-            rango_final: rango_final
-        })
+export const postConsecutivo = async (consecutivo) => {
+    let request = await axios.post(baseURL, {
+        valor : consecutivo.valor, 
+        descripcion : consecutivo.descripcion, 
+        prefijo : consecutivo.prefijo, 
+        rango_inicial : consecutivo.rango_inicial, 
+        rango_final : consecutivo.rango_final
+    });
+    console.log("INSIDE AXIOS::", request);
+    return request;
+}
 
-    return request.status;
+export const putConsecutivo = async (consecutivo) => {
+    let request = axios.put(`${baseURL}${consecutivo.id}`, {
+        id : consecutivo.id,
+        valor : consecutivo.valor, 
+        descripcion : consecutivo.descripcion, 
+        prefijo : consecutivo.prefijo, 
+        rango_inicial : consecutivo.rango_inicial, 
+        rango_final : consecutivo.rango_final
+    });
+
+    return request;
 }

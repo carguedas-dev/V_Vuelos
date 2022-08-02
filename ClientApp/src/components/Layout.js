@@ -80,8 +80,6 @@ export class Layout extends Component {
   }
 
   render () {
-    console.log("Rendering::Layout");
-    console.log("Data at LAYOUT level::", this.state.currentPage, this.state.currentSubPage);
     return (
       <div>
         <Header stateChange = {this.stateChange_GeneralAdmin}/>

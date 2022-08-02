@@ -5,14 +5,12 @@ import React, { Component } from 'react';
 export class General extends Component {
   static displayName = General.name;
 
-  
-
   render() {
 
     let fontSizeStyle = {fontSize : '20px'}
     return (
       <div>
-        <div style={{marginLeft : '22%', marginTop: '5%'}}>
+        <div style={{marginLeft : '5%', marginTop: '5%'}}>
           <h1>Bienvenido, {localStorage.getItem("idUsuario")}</h1>
           <br />
           <br />
@@ -46,16 +44,6 @@ export class BitacoraErrores extends Component {
   render() {
     return (
       <div>Componente: Bitacora Errores</div>
-    );
-  }
-}
-
-export class BitacoraEventos extends Component {
-  static displayName = BitacoraEventos.name;
-
-  render() {
-    return (
-      <div>Componente: Bitacora Eventos</div>
     );
   }
 }

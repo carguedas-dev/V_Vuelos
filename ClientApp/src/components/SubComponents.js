@@ -8,17 +8,18 @@ import Consecutivo from './subcomponents/Consecutivo';
 import Aerolineas from './subcomponents/Aerolineas';
 import Paises from './subcomponents/Paises';
 import Puertas from './subcomponents/Puertas';
-import CrearVuelo from './subcomponents/CrearVuelo'
+import Vuelos from './subcomponents/Vuelos'
 
 import AerolineasPais from './subcomponents/AerolineasPais';
 import PuertasActivas from './subcomponents/PuertasActivas';
 
 import TestingAxios from './subcomponents/TestingAxios';
 
+import BitacoraEventos from './subcomponents/BitacoraEventos'
+
 import {
   General,
-  BitacoraErrores,
-  BitacoraEventos,
+  BitacoraErrores
 }
   from './subcomponents/subs'
 
@@ -45,8 +46,6 @@ export class SubComponents extends Component {
   }
 
   render() {
-    console.log("Rendering::SubComponents");
-    console.log("Data at SUBCOMPONENTS level::", this.state.currentPage, this.state.currentSubPage);
 
     let componenteARenderizar;
 
@@ -85,7 +84,7 @@ export class SubComponents extends Component {
         componenteARenderizar = <PuertasActivas />
         break;
       case "Vuelos":
-        componenteARenderizar = <CrearVuelo />
+        componenteARenderizar = <Vuelos />
         break;
       default:
         break;
@@ -94,7 +93,9 @@ export class SubComponents extends Component {
     return (
       <div>
         <NavMenu className="navMenuStyle" stateChange={this.stateChange} currentPage={this.state.currentPage} currentSubPage={this.state.currentSubPage} userType={this.state.userType} />
-        {componenteARenderizar}
+        <div style={{maxHeight: '70vh', overflow: 'hidden'}}>
+          {componenteARenderizar}
+        </div>
       </div>
     );
   }
