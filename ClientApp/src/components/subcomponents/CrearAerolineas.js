@@ -8,44 +8,67 @@ const CrearAerolineas = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
+
         let nombre = nombreRef.current.value
-        let Image = ImageRef.current.value
+        let Image = ImageRef.current.files[0]
         let pais = paisRef.current.value
-        props.onPost(nombre, Image, pais);
-        e.target.reset();
+
+        if (nombre === ""){
+            alert("Debe introducir un nombre de aerolínea.");
+            return;
+        }
+
+        if (Image===undefined){
+            alert("Debe agregar una imagen.");
+            return;
+        }
+        if (!Image.type.includes('image')){
+            alert("El archivo cargado debe ser únicamente una imagen.");
+            Image.value = null;
+            return;
+        }
+
+        let reader = new FileReader();
+        reader.readAsDataURL(Image);
+        reader.onloadend = () => {
+            props.onPost(nombre, reader.result, pais);
+            e.target.reset();
+        }
     }
 
     return (
-        <div className='d-flex flex-column'>
+        <div className='d-flex flex-column ms-2 mt-3'>
             <div className='row'>
                 <h3>Agregar Aerolinea</h3>
             </div>
 
             <form action="" onSubmit={onSubmitHandler}>
                 <div className="row">
-                    <div className="col-md-2">
-                        <label for="id" className="form-label">Codigo Aerolinea</label>
+                    {/* <div className="col-md-2">
+                        <label htmlFor="id" className="form-label">Codigo Aerolinea</label>
                         <input type="text" className="form-control" id="id" disabled />
-                    </div>
+                    </div> */}
                     <div className="col-md-2">
-                        <label for="nombre" className="form-label">Aerolinea</label>
+                        <label htmlFor="nombre" className="form-label">Aerolinea</label>
                         <input type="text" className="form-control" id="nombre" ref={nombreRef} />
                     </div>
                     <div className="col-3 mb-3">
-                        <label for="Imagen" className="form-label">Logo</label>
+                        <label htmlFor="Imagen" className="form-label">Logo</label>
                         <input className="form-control" type="file" id="Imagen" ref={ImageRef} />
                     </div>
                     <div className="col-md-2">
-                        <label for="pais" className="form-label">Pais</label>
+                        <label htmlFor="pais" className="form-label">Pais</label>
                         <select name="pais" id="pais" className="form-select">
                             {props.paises.map(pais => <option key={pais.id} value={pais.id} ref={paisRef}>{pais.nombre}</option>)}
                         </select>
                     </div>
+                    <div className="col-4 mt-2">
+                        <br />
+                        <button type="submit" className="btn btn-primary mx-3">Agregar Aerolínea</button>
+                    </div>
                 </div>
 
-                <div className="col-12">
-                    <button type="submit" className="btn btn-primary mx-3">Submit</button>
-                </div>
+                
             </form>
         </div>
     );

@@ -164,8 +164,6 @@ export class NavMenu extends Component {
 
   render () {
     let userType = Number.parseInt(this.state.userType);
-    console.log("Rendering::NavMenu");
-    console.log("Data at NAVMENU level::", this.state.currentPage, this.state.currentSubPage);
     switch(userType){
       case 1:
         return this.administrador();

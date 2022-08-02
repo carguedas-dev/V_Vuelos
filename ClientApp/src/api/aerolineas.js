@@ -28,6 +28,7 @@ export const getAerolinea = async id => {
 }
 
 export const postAerolinea = async (nombre, imagen, pais) => {
+    console.log("INSIDE AXIOS POST AER::", nombre, imagen, pais);
     let request = axios.post(baseURL, {
         nombre: nombre,
         Imagen: imagen,

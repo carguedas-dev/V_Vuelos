@@ -141,8 +141,6 @@ export class SidePanel extends Component {
   }
 
   render() {
-    console.log("Rendering::SidePanel")
-    console.log("Data at SIDEPANEL level::", this.state.currentPage, this.state.currentSubPage);
     return (
       <div className="sidePanel">
 
