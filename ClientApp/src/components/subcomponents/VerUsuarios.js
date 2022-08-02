@@ -18,7 +18,14 @@ const VerUsuarios = () => {
 
     const getRols = async () => {
         let roles = await getRoles();
+        roles = [...roles, { id: 0, descripcion: 'Not Defined' }];
         setRoles(roles);
+    }
+
+    console.log(roles)
+
+    for (const usuario of usuarios) {
+        if (!usuario.rol) console.log(usuario.usuario1);
     }
 
     const onSelected = async e => {
@@ -30,13 +37,13 @@ const VerUsuarios = () => {
         if (request.status === 202) {
             getUsers();
             alert(`Rol de usuario ${targetUser} actualizado correctamente.`);
-            console.log(roles[newRole-1].descripcion)
+            console.log(roles[newRole - 1].descripcion)
 
             let bitacora = {
-                registro_detalle : targetUser,
-                usuario : localStorage.getItem('idUsuario'),
-                operacion : 2,
-                descripcion : `Se modifica el rol del usuario ${targetUser} a ${roles[newRole-1].descripcion}.`
+                registro_detalle: targetUser,
+                usuario: localStorage.getItem('idUsuario'),
+                operacion: 2,
+                descripcion: `Se modifica el rol del usuario ${targetUser} a ${roles[newRole - 1].descripcion}.`
             }
 
             let request = await postBitacora(bitacora);
@@ -56,7 +63,7 @@ const VerUsuarios = () => {
             <td><select
                 name={u.usuario1}
                 id={u.usuario1}
-                value={u.rol}
+                value={u.rol? u.rol : 0}
                 onChange={onSelected}>
                 {roles.map(rol => <option key={rol.id} value={rol.id}>{rol.descripcion}</option>)}
             </select></td>
@@ -64,7 +71,7 @@ const VerUsuarios = () => {
     )
 
     return (
-        <div style={{minHeight: '70vh', maxHeight: '70vh'}}className='d-flex justify-content-center table-responsive scrollableDivTall'>
+        <div style={{ minHeight: '70vh', maxHeight: '70vh' }} className='d-flex justify-content-center table-responsive scrollableDivTall'>
             <table className="table table-striped">
                 <thead className="table-light">
                     <tr>

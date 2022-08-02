@@ -15,6 +15,7 @@ export const getUsuarios = async () => {
     const URL = baseURL + `usuarios`;
     let response = await axios.get(URL);
     let usuarios = response.data;
+
     return usuarios;
 }
 
