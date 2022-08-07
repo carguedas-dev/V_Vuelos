@@ -19,15 +19,18 @@ export const getBusquedaBitacora = async (payload) => {
 export const postBitacora = async bitacora => {
 
     let date = new Date();
-
+    console.log("INSIDE AXIOS bitacora::", bitacora);
     let request = await axios.post(baseURL, {
-        fecha : `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+        fecha : `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
         hora : `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         registro_detalle : bitacora.registro_detalle, 
         usuario : bitacora.usuario, 
         operacion : bitacora.operacion,
         descripcion : bitacora.descripcion
     });
+
+    console.log("Post request result::", request)
+
 
     return request;
 }

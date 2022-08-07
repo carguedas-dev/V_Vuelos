@@ -17,7 +17,7 @@ export const getVuelo = async id => {
 export const postVuelo = async (vuelo) => {
     let request = await axios.post(baseURL, {
         fecha_partida : vuelo.fecha_partida,
-        hora_partida : vuelo.hora_llegada, 
+        hora_partida : vuelo.hora_partida, 
         fecha_llegada : vuelo.fecha_llegada, 
         hora_llegada : vuelo.hora_llegada, 
         aerolinea : vuelo.aerolinea, 
