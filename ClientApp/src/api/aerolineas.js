@@ -34,6 +34,7 @@ export const postAerolinea = async (nombre, imagen, pais) => {
         Imagen: imagen,
         pais: pais
     });
+    console.log("AXIOS RESULT::", request);
     return request;
 }
 

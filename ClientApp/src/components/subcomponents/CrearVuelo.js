@@ -42,6 +42,7 @@ const CrearVuelo = props => {
             saliendo : false
         }
 
+        console.log(vuelo)
         props.onPost(vuelo);
         e.target.reset();
     }
@@ -55,29 +56,29 @@ const CrearVuelo = props => {
                 <div className='row mb-3'>
                     <div className="col col-2">
                         <label htmlFor='fecha Partida'>Fecha partida</label>
-                        <input ref={fechaPartida} className='form-control' id='fecha Partida' type='date' />
+                        <input ref={fechaPartida} className='form-control' type='date' />
                     </div>
                     <div className="col col-2">
                         <label htmlFor='hora_partida'>Hora partida</label>
-                        <input ref={horaPartida} className='form-control' id='hora_partida' type='time' />
+                        <input ref={horaPartida} className='form-control' type='time' />
                     </div>
                     <div className="col col-2">
                         <label htmlFor='lugar_partida'>Lugar partida</label>
-                        <select ref={lugarPartida} className='form-control' id='lugar_partida' type='text' >
+                        <select ref={lugarPartida} className='form-control' type='text' >
                             <option value="N/A">Seleccione </option>
                             {props.paises.map(pais => <option key={pais.id} value={pais.id}>{pais.nombre}</option>)}
                         </select>
                     </div>
                     <div className="col col-2">
                         <label htmlFor='hora_partida'>Aerolinea</label>
-                        <select ref={aerolinea} className='form-control' id='hora_partida' type='time'>
+                        <select ref={aerolinea} className='form-control' type='time'>
                             <option value="N/A">Seleccione</option>
                             {props.aerolineas.map(aerolinea => <option key={aerolinea.id} value={aerolinea.id}>{aerolinea.nombre}</option>)}
                         </select>
                     </div>
                     <div className="col col-2">
                         <label htmlFor='puerta'>Puerta</label>
-                        <select ref={puerta} className='form-control' id='puerta' type='text'>
+                        <select ref={puerta} className='form-control' type='text'>
                             <option value="N/A">Seleccione</option>
                             {props.puertas.map(puerta => <option key={puerta.id} value={puerta.id}>{puerta.numero}</option>)}
                         </select>
@@ -86,22 +87,22 @@ const CrearVuelo = props => {
                 <div className='row mb-3'>
                     <div className="col col-2">
                         <label htmlFor='fecha_llegada'>Fecha llegada</label>
-                        <input ref={fechaLlegada} className='form-control' id='fecha_llegada' type='date' />
+                        <input ref={fechaLlegada} className='form-control' type='date' />
                     </div>
                     <div className="col col-2">
                         <label htmlFor='hora_llegada'>Hora llegada</label>
-                        <input ref={horaLlegada} className='form-control' id='hora_llegada' type='time' />
+                        <input ref={horaLlegada} className='form-control' type='time' />
                     </div>
                     <div className="col col-2">
                         <label htmlFor='lugar_llegada'>Lugar llegada</label>
-                        <select ref={lugarLlegada} className='form-control' id='lugar_llegada' type='text' >
+                        <select ref={lugarLlegada} className='form-control' type='text' >
                             <option value="N/A">Seleccione</option>
                             {props.paises.map(pais => <option key={pais.id} value={pais.id}>{pais.nombre}</option>)}
                         </select>
                     </div>
                     <div className="col col-2">
                         <label htmlFor='estado'>Estado</label>
-                        <select ref={estado} className='form-control' id='estado' type='text' >
+                        <select ref={estado} className='form-control' type='text' >
                             <option value="N/A">Seleccione</option>
                             {props.estados.map(estado => <option key={estado.id} value={estado.id}>{estado.descripcion}</option>)}
                         </select>

@@ -58,8 +58,8 @@ const CrearAerolineas = props => {
                     </div>
                     <div className="col-md-2">
                         <label htmlFor="pais" className="form-label">Pais</label>
-                        <select name="pais" id="pais" className="form-select">
-                            {props.paises.map(pais => <option key={pais.id} value={pais.id} ref={paisRef}>{pais.nombre}</option>)}
+                        <select ref={paisRef} name="pais" id="pais" className="form-select">
+                            {props.paises.map(pais => <option key={pais.id} value={pais.id}>{pais.nombre}</option>)}
                         </select>
                     </div>
                     <div className="col-4 mt-2">

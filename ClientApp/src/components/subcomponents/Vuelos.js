@@ -45,31 +45,26 @@ const Vuelos = () => {
 
     const addVue = async (vuelo) => {
         let request = await postVuelo(vuelo);
-        if (request.status === 201) {
+        console.log("Ahora qué hay en el puto request::", request);
+        if (request.status === 200) {
             alert("Vuelo agregado satisfactoriamente.");
             getVue();
 
-            let nuevoVuelo = vuelos.find(vuelo => vuelo.id === request.data.id);
-            let paisVuelo_parte = paises.find(pais => pais.id === nuevoVuelo.parte_de);
-            let paisVuelo_llega = paises.find(pais => pais.id === nuevoVuelo.llega_a);
-            let aerolineaVuelo = aerolineas.find(aer => aer.id === nuevoVuelo.aerolinea);
-            let estadoVuelo = estados.find(estado => estado.id === nuevoVuelo.estado);
-            let puertaVuelo = puertas.find(puerta => puerta.id === nuevoVuelo.puerta);
-
             let bitacora = {
-                registro_detalle : nuevoVuelo.id,
+                registro_detalle : request.data.id,
                 usuario : localStorage.getItem('idUsuario'),
                 operacion : 1,
                 descripcion :
                 `
-                Se adiciona el vuelo con identificación ${nuevoVuelo.id}. 
-                Datos introducidos: --> ID: ${nuevoVuelo.id}, --> Fecha Partida: ${nuevoVuelo.fecha_partida}, --> Hora Partida: ${nuevoVuelo.hora_partida},
-                --> Fecha Llegada: ${nuevoVuelo.fecha_llegada}, --> Hora Llegada: ${nuevoVuelo.hora_llegada}, --> Aerolínea: ${aerolineaVuelo.nombre},
-                --> Puerta: ${puertaVuelo.numero}, --> Estado: ${estadoVuelo.descripcion}, --> Parte De: ${paisVuelo_parte.nombre}, --> Llega A: ${paisVuelo_llega.nombre}, 
-                --> Arribando o Saliendo (inicial) : ${nuevoVuelo.saliendo ? 'Arribando' : 'Saliendo'}
+                Se adiciona el vuelo con identificación ${request.data.id}. 
+                Datos introducidos: --> ID: ${request.data.id}, --> Fecha Partida: ${request.data.fechaPartidaDesc}, --> Hora Partida: ${request.data.horaPartidaDesc},
+                --> Fecha Llegada: ${request.data.fechaLlegadaDesc}, --> Hora Llegada: ${request.data.horaLlegadaDesc}, --> Aerolínea: ${request.data.aerolineaDesc},
+                --> Puerta: ${request.data.puertaDesc}, --> Estado: ${request.data.estadoDesc}, --> Parte De: ${request.data.parteDesc}, --> Llega A: ${request.data.llegaDesc}, 
+                --> Arribando o Saliendo (inicial) : ${request.data.saliendo ? 'Arribando' : 'Saliendo'}
                 `
             }
     
+            console.log('Coming through API::', request);
             let requestBitacora = await postBitacora(bitacora);
         }
             
@@ -113,7 +108,7 @@ const Vuelos = () => {
             <td>{vue.nombre_aerolinea}</td>
             <td>{vue.numero_puerta}</td>
             <td>{vue.descripcion_estado}</td>
-            <td>{vue.saliendo ? 'Saliendo' : 'Arribando'}</td>
+            <td>{vue.saliendo === true ? 'Saliendo' : 'Arribando'}</td>
             <td>{vue.nombre_pais_parte}</td>
             <td>{vue.nombre_pais_llega}</td>
             <td><button

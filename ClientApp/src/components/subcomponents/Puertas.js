@@ -50,6 +50,7 @@ const Puertas = () => {
         
         let request = await postPuerta(nombre, estado);
         if (request.status === 201) {
+            alert(`Puerta con nombre ${nombre} ha sido agregada exitosamente.`);
             getGates();
 
             let bitacora = {
